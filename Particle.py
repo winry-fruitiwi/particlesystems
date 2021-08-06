@@ -8,24 +8,32 @@ class Particle:
         self.lifetime = 100
         # pos is a PVector that determines the starting position. Based on x and y.
         self.pos = PVector(x, y)
+        # vel is a PVector that determines how fast the object is.
         self.vel = PVector(0, 0)
+        # acc is a PVector that dictates how the object's velocity is changing.
         self.acc = PVector(0, 0)
     
     
     # shows this particle using its lifetime instance field.
     # note that I learned the term "instance field" from Java and it may not apply here.
     def show(self):
-        pass
+        stroke(0, 0, 100, self.lifetime)
+        fill(0, 0, 100, self.lifetime)
+        circle(self.pos.x, self.pos.y, 8)
     
     
     # apply a force to the particle. A classic example of Newton's Second Law, F = ma.
     def apply_force(self, force):
-        pass
+        # F = ma, so a = F/m. However, m = 1, so a = F.
+        self.acc.add(force)
     
     
     # this updates the particle's position, velocity, and acceleration.
     def update(self):
-        pass
+        self.pos.add(self.vel)
+        self.vel.add(self.acc)
+        self.acc = PVector(0, 0)
+        self.lifetime -= random(6)
     
     
     # if the particle is dead, return true.

@@ -19,7 +19,7 @@ def setup():
     size(800, 800)
     # noCursor() # TODO: add this later for the addition
     # now we need to make the particles.
-    for i in range(2):
+    for i in range(100):
         particles.append(Particle(width/2, height/2))
 
 
