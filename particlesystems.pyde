@@ -16,9 +16,10 @@ def setup():
     particles = []
     
     colorMode(HSB, 360, 100, 100)
-    size(800, 800)
+    size(945, 1000)
     noCursor() # TODO: add this later for the addition
     # now we need to make the particles.
+    strokeWeight(2)
 
 
 def draw():
@@ -26,15 +27,19 @@ def draw():
     background(220, 79, 35)
     gravity = PVector(0, 0.2)
     
-    for i in range(5):
+    for i in range(2):
         particles.append(Particle(mouseX, mouseY))
+        #particles.append(Particle(mouseX-10, mouseY))
     
     # let's operate on all of the particles. I'm preparing to remove particles later.
     for i in range(len(particles)-1, 0, -1):
         p = particles[i]
-        p.show()
         p.update()
+        p.show()
         p.apply_force(gravity)
         # we need to pop particles that have outstayed their welcome ; ;
         if p.finished():
             particles.remove(p)
+    
+    #fill(100, 100, 100, 100)
+    #text(len(particles), 10, 10)
