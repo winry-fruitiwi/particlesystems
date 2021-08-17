@@ -9,7 +9,7 @@ class Particle:
         # pos is a PVector that determines the starting position. Based on x and y.
         self.pos = PVector(x, y)
         # vel is a PVector that determines how fast the object is.
-        self.vel = PVector.random2D().mult(random(0.1, 0.9))
+        self.vel = PVector.random2D().mult(random(3))
         # acc is a PVector that dictates how the object's velocity is changing.
         self.acc = PVector(0, 0)
     
@@ -34,7 +34,7 @@ class Particle:
         else:
             stroke(30, 20, 100, self.lifetime)
             fill(30, 20, 100, self.lifetime)
-            circle(self.pos.x, self.pos.y, 10)
+            #circle(self.pos.x, self.pos.y, 10)
         
             
     
@@ -50,7 +50,7 @@ class Particle:
         self.pos.add(self.vel)
         self.vel.add(self.acc)
         self.acc = PVector(0, 0)
-        self.lifetime -= random(10)
+        self.lifetime -= random(20)
     
     
     # if the particle is dead, return true.
