@@ -1,7 +1,7 @@
 # This creates a single small, white orb that disappears as time goes on.
 # My addition will make the particle flourish and make a new color before disappearing.
 
-class Particle:
+class Particle(object):
     def __init__(self, x, y):
         # lifetime is the instance field that determines the alpha of the fill in show.
         # Later, when lifetime gets to zero, I will pop it from the list of particles.
@@ -32,9 +32,9 @@ class Particle:
             
         
         else:
-            stroke(30, 20, 100, self.lifetime)
-            fill(30, 20, 100, self.lifetime)
-            #circle(self.pos.x, self.pos.y, 10)
+            stroke(0, 00, 100, self.lifetime)
+            fill(0, 0, 100, self.lifetime)
+            circle(self.pos.x, self.pos.y, 10)
         
             
     

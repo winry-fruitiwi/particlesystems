@@ -2,7 +2,7 @@
 from Particle import *
 
 
-class Emitter:
+class Emitter(object):
     def __init__(self, x, y):
         self.pos = PVector(x, y)
         self.particles = [] # this is a list of all the particles this emitter has.
