@@ -13,6 +13,7 @@ from Particle import *
 from Emitter import *
 from Firestarter import *
 from Fireburst import *
+from Trail import *
 
 
 def setup():
@@ -41,13 +42,13 @@ def draw():
     gravity = PVector(0, 0.1)
     
     noStroke()
-    fill(120, 100, 80, 80)
-    rect(-10, 7*height/8, width+20, height/8)
-    fill(0, 100, 80, 80)
-    rect(width/3, 7 * height/8 - 50, width/25, 50)
-    triangle(width/3 - 8, 7 * height/8 - 50,
-             width/3 + 18, 7*height/8-80,
-             width/3 + 44, 7 * height/8 - 50)
+    # fill(120, 100, 80, 80)
+    # rect(-10, 7*height/8, width+20, height/8)
+    # fill(0, 100, 80, 80)
+    # rect(width/3, 7 * height/8 - 50, width/25, 50)
+    # triangle(width/3 - 8, 7 * height/8 - 50,
+    #          width/3 + 18, 7*height/8-80,
+    #          width/3 + 44, 7 * height/8 - 50)
     
     # let's operate on all of the particles. I'm preparing to remove particles later.
     for e in emitters:
@@ -60,13 +61,16 @@ def draw():
         starter.show()
         starter.update()
         if starter.finished():
-            firebursts.append(Fireburst(starter.pos.x, starter.pos.y))
+            burst = Fireburst(starter.pos.x, starter.pos.y)
+            burst.emit()
+            # delay(10)
+            burst.emit()
+            firebursts.append(burst)
             firestarters.remove(starter)
     
     for i in range(len(firebursts) - 1, -1, -1):
         fireburst = firebursts[i]
         fireburst.show()
-        fireburst.emit()
         fireburst.emit_update()
         fireburst.update(PVector(0, 0))
         
@@ -74,10 +78,13 @@ def draw():
             firebursts.remove(fireburst)
         
     
-    #fill(100, 100, 100, 100)
-    text(len(emitters), 10, 10)
+    # fill(100, 100, 100, 100)
+    # text(len(emitters), 10, 10)
 
 
 def mousePressed():
     global emitters, firestarters
-    firestarters.append(Firestarter(mouseX, mouseY))
+    
+    for i in range(5):
+        firestarters.append(Firestarter(random(100, width+100), height - 2))
+    

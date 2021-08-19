@@ -18,7 +18,7 @@ class Emitter(object):
     
     # emits a particle
     def emit(self):
-        for i in range(int(random(3, 5))):
+        for i in range(int(random(35, 40))):
             self.particles.append(Particle(self.pos.x, self.pos.y))
     
     
