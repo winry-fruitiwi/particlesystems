@@ -51,17 +51,22 @@ def draw():
     #          width/3 + 44, 7 * height/8 - 50)
     
     # let's operate on all of the particles. I'm preparing to remove particles later.
-    for e in emitters:
-        e.show()
-        e.update(gravity)
-        e.emit()
+    # for e in emitters:
+    #     e.show()
+    #     e.update(gravity)
+    #     e.emit() # we will never use emitters.
     
     for i in range(len(firestarters) - 1, -1, -1):
         starter = firestarters[i]
         starter.show()
         starter.update()
+        starter.emit()
         if starter.finished():
-            burst = Fireburst(starter.pos.x, starter.pos.y)
+            # the firestarter is the tiny glob that goes into the sky with a small trail
+            # but the burst is what produces the bright flourish. This simulates a firework.
+            burst = Fireburst(starter.pos.x,
+                              starter.pos.y, 
+                              random(360), random(80, 100), 100)
             burst.emit()
             # delay(10)
             burst.emit()
@@ -72,7 +77,13 @@ def draw():
         fireburst = firebursts[i]
         fireburst.show()
         fireburst.emit_update()
-        fireburst.update(PVector(0, 0))
+        fireburst.pupdate(PVector(0, 0))
+        
+        burst_pattern = fireburst.ellipse_burst()
+        # fireburst has an array of particles, and can have a force applied on them.
+        # they also have a seek method that brings them towards their target.
+        for i in range(len(fireburst.particles) - 1):
+            fireburst.particles[i].apply_force(fireburst.particles[i].seek(burst_pattern[i]))
         
         if fireburst.finished():
             firebursts.remove(fireburst)
@@ -86,5 +97,5 @@ def mousePressed():
     global emitters, firestarters
     
     for i in range(5):
-        firestarters.append(Firestarter(random(100, width+100), height - 2))
+        firestarters.append(Firestarter(random(100, width - 100), height - 2))
     

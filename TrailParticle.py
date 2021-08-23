@@ -2,10 +2,12 @@
 from Particle import *
 
 
-class Trail(Particle):
+class TrailParticle(Particle):
     def __init__(self, x, y, r):
-        super(Trail, self).__init__(self, x, y)
+        super(TrailParticle, self).__init__(x, y, 0, 0, 100)
+        self.vel = PVector(random(-0.8, 0.8), 1)
         self.r = r
+        self.decrement_rate = 10
     
     
     def show(self):

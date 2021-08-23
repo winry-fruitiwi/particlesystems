@@ -23,7 +23,7 @@ class Emitter(object):
     
     
     # updates every single particle. Yikes!
-    def update(self, force):
+    def pupdate(self, force):
         for particle in self.particles:
             particle.update()
             particle.apply_force(force)
